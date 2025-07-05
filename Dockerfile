@@ -30,7 +30,7 @@ RUN sh Miniconda3-latest-Linux-x86_64.sh -b -u -p ~/miniconda3
 RUN ~/miniconda3/bin/conda init
 RUN /root/miniconda3/bin/conda create -n nerfstream python=3.10
 
-RUN /root/miniconda3/bin/conda run -n nerfstream pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
+RUN /root/miniconda3/bin/conda run -n nerfstream pip config set global.index-url https://pypi.org/simple
 # install depend
 RUN /root/miniconda3/bin/conda run -n nerfstream conda install pytorch==1.12.1 torchvision==0.13.1 cudatoolkit=11.3 -c pytorch -y
 COPY requirements.txt ./
