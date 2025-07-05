@@ -3,7 +3,8 @@ FROM nvcr.io/nvidia/cuda:11.6.1-cudnn8-devel-ubuntu20.04 AS builder
 
 RUN apt-get update -yq --fix-missing && \
     DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-    pkg-config wget cmake curl git vim
+    pkg-config wget cmake curl git vim \
+    libgl1-mesa-glx libsm6 libxext6 libxrender1 ffmpeg libglib2.0-0 ca-certificates
 
 # Install Miniconda
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
@@ -31,7 +32,8 @@ FROM nvcr.io/nvidia/cuda:11.6.1-cudnn8-devel-ubuntu20.04
 
 RUN apt-get update -yq --fix-missing && \
     DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-    pkg-config wget cmake curl git vim
+    pkg-config wget cmake curl git vim \
+    libgl1-mesa-glx libsm6 libxext6 libxrender1 ffmpeg libglib2.0-0 ca-certificates
 
 # Copy Miniconda and environment from builder
 COPY --from=builder /root/miniconda3 /root/miniconda3
