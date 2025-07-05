@@ -33,7 +33,7 @@ RUN conda create -n nerfstream python=3.10
 SHELL ["/bin/bash", "-c"]
 
 # install depend
-RUN conda install pytorch==1.12.1 torchvision==0.13.1 cudatoolkit=11.3 -c pytorch
+RUN source ~/miniconda3/etc/profile.d/conda.sh && conda activate nerfstream && conda install pytorch==1.12.1 torchvision==0.13.1 cudatoolkit=11.6 -c pytorch
 Copy requirements.txt ./
 RUN pip install -r requirements.txt
 
