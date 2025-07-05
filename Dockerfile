@@ -44,8 +44,8 @@ RUN /root/miniconda3/bin/conda run -n nerfstream pip uninstall -y protobuf
 RUN /root/miniconda3/bin/conda run -n nerfstream pip install protobuf==3.20.1
 
 RUN /root/miniconda3/bin/conda run -n nerfstream conda install ffmpeg -y
-COPY ../python_rtmpstream /python_rtmpstream
-WORKDIR /python_rtmpstream/python
+#COPY ../python_rtmpstream /python_rtmpstream
+#WORKDIR /python_rtmpstream/python
 RUN /root/miniconda3/bin/conda run -n nerfstream pip install .
 
 COPY ../nerfstream /nerfstream
