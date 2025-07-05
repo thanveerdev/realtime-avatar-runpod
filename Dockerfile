@@ -12,15 +12,16 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &
 
 ENV PATH="/root/miniconda3/bin:$PATH"
 
-# Create environment and install dependencies
-RUN conda create -n nerfstream python=3.10 -y
+# Create environment and install dependencies, then clean up caches in the same layer
 COPY requirements.txt ./
-RUN /root/miniconda3/bin/conda run -n nerfstream pip install -r requirements.txt
-RUN /root/miniconda3/bin/conda run -n nerfstream pip install "git+https://github.com/facebookresearch/pytorch3d.git"
-RUN /root/miniconda3/bin/conda run -n nerfstream pip install tensorflow-gpu==2.8.0
-RUN /root/miniconda3/bin/conda run -n nerfstream pip uninstall -y protobuf
-RUN /root/miniconda3/bin/conda run -n nerfstream pip install protobuf==3.20.1
-RUN /root/miniconda3/bin/conda run -n nerfstream conda install ffmpeg -y
+RUN /root/miniconda3/bin/conda create -n nerfstream python=3.10 -y && \
+    /root/miniconda3/bin/conda run -n nerfstream pip install -r requirements.txt && \
+    /root/miniconda3/bin/conda run -n nerfstream pip install "git+https://github.com/facebookresearch/pytorch3d.git" && \
+    /root/miniconda3/bin/conda run -n nerfstream pip install tensorflow-gpu==2.8.0 && \
+    /root/miniconda3/bin/conda run -n nerfstream pip uninstall -y protobuf && \
+    /root/miniconda3/bin/conda run -n nerfstream pip install protobuf==3.20.1 && \
+    /root/miniconda3/bin/conda run -n nerfstream conda install ffmpeg -y && \
+    rm -rf /root/.cache/pip /root/miniconda3/pkgs
 
 # Copy your code
 COPY . /nerfstream
