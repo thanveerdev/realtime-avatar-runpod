@@ -51,3 +51,5 @@ RUN /root/miniconda3/bin/conda run -n nerfstream conda install ffmpeg -y
 #COPY ../nerfstream /nerfstream
 WORKDIR /nerfstream
 CMD ["/root/miniconda3/envs/nerfstream/bin/python", "app.py"]
+
+RUN rm -rf /root/.cache/pip /root/miniconda3/pkgs
