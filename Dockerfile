@@ -30,7 +30,7 @@ RUN sh Miniconda3-latest-Linux-x86_64.sh -b -u -p ~/miniconda3
 ENV PATH="/root/miniconda3/bin:$PATH"
 RUN ~/miniconda3/bin/conda init
 RUN conda create -n nerfstream python=3.10
-RUN conda activate nerfstream
+SHELL ["/bin/bash", "-c"]
 
 # install depend
 RUN conda install pytorch==1.12.1 torchvision==0.13.1 cudatoolkit=11.3 -c pytorch
