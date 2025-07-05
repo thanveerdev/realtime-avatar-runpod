@@ -27,13 +27,14 @@ RUN apt-get update -yq --fix-missing \
 
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 RUN sh Miniconda3-latest-Linux-x86_64.sh -b -u -p ~/miniconda3
-ENV PATH="/root/miniconda3/bin:$PATH"
 RUN ~/miniconda3/bin/conda init
+RUN source ~/.bashrc
 RUN conda create -n nerfstream python=3.10
-SHELL ["/bin/bash", "-c"]
+RUN conda activate nerfstream
 
+RUN pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
 # install depend
-RUN source ~/miniconda3/etc/profile.d/conda.sh && conda activate nerfstream && conda install pytorch==1.12.1 torchvision==0.13.1 cudatoolkit=11.6 -c pytorch -c nvidia
+RUN conda install pytorch==1.12.1 torchvision==0.13.1 cudatoolkit=11.3 -c pytorch
 Copy requirements.txt ./
 RUN pip install -r requirements.txt
 
