@@ -36,7 +36,7 @@ aiohttp_cors
 ffmpeg-python
 omegaconf
 diffusers==0.25.0
-accelerate
+accelerate==0.22.0
 
 librosa
 openai
